@@ -14,7 +14,7 @@ sections:
     page_rows: 5
     search_category: posts
   browse:
-    randomize: true
+    randomize: false
     search_category: blogs
 blog_metadata: !import "data/blogs/metadata.yaml"
 post_cache: !import-list "data/blogs/posts"

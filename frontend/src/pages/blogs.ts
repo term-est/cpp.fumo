@@ -92,6 +92,45 @@ function setBusy(element: HTMLElement, busy: boolean): void {
     });
 }
 
+let orderObserver: MutationObserver | null = null;
+
+function sortByScore(): void {
+  const grid = document.querySelector<HTMLElement>(".blog-grid");
+  if (!grid) return;
+
+  if (!orderObserver) {
+    const searchInput = document.querySelector<HTMLInputElement>(
+      "[data-directory-input]",
+    );
+    orderObserver = new MutationObserver(() => {
+      if (!searchInput?.value.trim()) sortByScore();
+    });
+    orderObserver.observe(grid, { childList: true });
+  }
+
+  const score = (card: HTMLElement): number =>
+    Number(
+      card.querySelector<HTMLElement>("[data-blog-vote]")?.dataset.score ?? 0,
+    );
+
+  const cards = Array.from(
+    grid.querySelectorAll<HTMLElement>(":scope > .blog-card"),
+  );
+  cards.sort((left, right) => {
+    const difference = score(right) - score(left);
+    if (difference) return difference;
+    return (left.dataset.searchTitle ?? "").localeCompare(
+      right.dataset.searchTitle ?? "",
+      undefined,
+      { sensitivity: "base" },
+    );
+  });
+
+  const current = Array.from(grid.children);
+  if (cards.every((card, index) => card === current[index])) return;
+  grid.append(...cards);
+}
+
 function redirectTarget(): string {
   const url = new URL(window.location.href);
   url.hash = "";
@@ -121,6 +160,7 @@ export async function initBlogVoting(): Promise<void> {
       const element = byId.get(row.blog_id);
       if (element) setScore(element, Number(row.score) || 0);
     }
+    sortByScore();
   }
 
   async function loadUserVotes(session: SupabaseSession | null): Promise<void> {
