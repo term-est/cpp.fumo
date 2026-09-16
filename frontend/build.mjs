@@ -27,6 +27,7 @@ const codeblocksSource = path.dirname(
 const entryPoints = {
   "service-worker": path.join(source, "workers/service-worker.ts"),
   "assets/search-worker": path.join(source, "workers/search-worker.ts"),
+  "assets/blogs": path.join(source, "pages/blogs.ts"),
   "assets/directory": path.join(source, "pages/directory.ts"),
   "assets/documentation": path.join(source, "pages/documentation.ts"),
   "assets/event-calendar": path.join(source, "pages/event-calendar.ts"),

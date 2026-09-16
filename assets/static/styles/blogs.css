@@ -48,6 +48,52 @@
   color: var(--secondary);
 }
 
+
+.blog-vote {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.1rem 0.25rem;
+  background: var(--soft);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+}
+
+.blog-vote button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.65rem;
+  height: 1.65rem;
+  padding: 0;
+  color: var(--secondary);
+  background: transparent;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  font: inherit;
+}
+
+.blog-vote button:hover,
+.blog-vote button:focus-visible,
+.blog-vote button[aria-pressed="true"] {
+  color: var(--accent);
+  background: var(--entry);
+  outline: none;
+}
+
+.blog-vote output {
+  min-width: 1.8rem;
+  color: var(--primary);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.blog-vote[aria-busy="true"] {
+  opacity: 0.6;
+}
+
 .blog-latest {
   margin-bottom: 2.75rem;
 }

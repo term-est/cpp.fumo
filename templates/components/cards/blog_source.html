@@ -23,6 +23,23 @@
     </header>
     {% if description %}<p class="blog-card__description card-description"><span class="card-description__text">{{ description }}</span></p>{% endif %}
     <footer class="blog-card__footer">
+        <div class="blog-vote"
+             data-blog-vote
+             data-blog-id="{{ blog.id }}"
+             data-vote="0"
+             data-score="0"
+             role="group"
+             aria-label="Vote on {{ blog.title }}">
+            <button type="button"
+                    data-blog-vote-value="1"
+                    aria-label="Upvote"
+                    aria-pressed="false">▲</button>
+            <output data-blog-vote-score aria-label="Score">0</output>
+            <button type="button"
+                    data-blog-vote-value="-1"
+                    aria-label="Downvote"
+                    aria-pressed="false">▼</button>
+        </div>
         <a href="{{ blog.website_url }}" target="_blank" rel="noopener">{{ page.config.ui.browse.read_blog }} <span aria-hidden="true">→</span></a><a href="{{ blog.rss_url }}" target="_blank" rel="noopener">{{ page.config.ui.browse.rss }}</a>
     </footer>
 </article>

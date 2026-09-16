@@ -52,3 +52,10 @@
         </div>
     </section>
 {% endblock %}
+{% block directory_scripts %}
+    <script type="module">
+        import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.116.0/+esm";
+        window.supabase = { createClient };
+        await import("{{ '/assets/blogs.js'|url }}");
+    </script>
+{% endblock %}
